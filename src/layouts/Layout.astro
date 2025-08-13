@@ -11,13 +11,16 @@ const { title, description, image } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Toldos Blanco | {title}</title>
+    <title>{title} | Toldos Blasco</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="description" content=`propstgonz - ${description}` />
     <meta property="og:image" content={image} />
   </head>
   <Header />
-  <slot />
+  <main class="py-10">
+    <slot />
+  </main>
   <Footer />
+
 
 </html>
