@@ -11,7 +11,7 @@
     let index = 0;
     let timer = null;
     const autoplay = true;
-    const autoplayMs = 5000;
+    const autoplayMs = 6000;
 
     const setIndex = (i) => {
       index = (i + slides.length) % slides.length;
