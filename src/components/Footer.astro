@@ -1,20 +1,32 @@
-<footer class="bg-white py-8 text-black">
+---
+import Image from "astro/components/Image.astro"
+import instagram from "../assets/img/icons/instagram.png"
+import linkedin from "../assets/img/icons/linkedin.png"
+import twitter from "../assets/img/icons/twitter.png"
+import youtube from "../assets/img/icons/youtube.png"
+---
+
+<footer class="border-t py-8 bg-gray-150 text-black font-bold" style="border-color: #A0522D;">
   <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-    <!-- Logo + Redes Sociales -->
     <div class="flex flex-col space-y-6">
-      <!-- Logo -->
       <img src="logo.png" alt="Logo" class="w-8 h-auto" />
 
-      <!-- Redes sociales (solo iconos) -->
       <div class="flex items-center space-x-4">
-        <img src="icon-x.png" class="w-5 h-5" />
-        <img src="icon-instagram.png" class="w-5 h-5" />
-        <img src="icon-youtube.png" class="w-5 h-5" />
-        <img src="icon-linkedin.png" class="w-5 h-5" />
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+          <Image src={instagram} alt="Instagram" class="w-5 h-5" />
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+          <Image src={linkedin} alt="LinkedIn" class="w-5 h-5" />
+        </a>
+        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+          <Image src={twitter} alt="Twitter" class="w-5 h-5" />
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+          <Image src={youtube} alt="YouTube" class="w-5 h-5" />
+        </a>
       </div>
     </div>
 
-    <!-- Contacto -->
     <div>
       <h3 class="font-semibold mb-4">Contacto</h3>
       <ul class="space-y-2 text-sm">
@@ -25,7 +37,6 @@
       </ul>
     </div>
 
-    <!-- Cómo podemos ayudarte -->
     <div>
       <h3 class="font-semibold mb-4">Cómo podemos ayudarte</h3>
       <ul class="space-y-2 text-sm">
