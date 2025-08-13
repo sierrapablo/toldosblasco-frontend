@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import SobreNosotros from '../components/Sobre-Nosotros.astro';
+import ClientesOpinion from '../components/ClientesOpinion.astro';
 
 const PAGE_PROPS = {
   title: 'Inicio',
@@ -16,4 +17,8 @@ const PAGE_PROPS = {
 
   {/* Apartado "Quiénes somos" */}
   <SobreNosotros />
+
+  {/* Carrusel de opiniones de clientes */}
+  <ClientesOpinion />
+
 </Layout>

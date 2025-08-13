@@ -1,8 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const PAGE_PROPS = {
+  title: 'Contacto',
+  description: 'Contacto.',
+  image: '/metaimage.png',
+};
 ---
 
-<Layout>
+<Layout {...PAGE_PROPS}>
   <main class="flex-grow flex items-center justify-center px-4">
     <form
       action="#"
