@@ -1,0 +1,23 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+const { title, description, image } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="bg-[#FFFFFF] text-gray-200 font-mono">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Toldos Blanco | {title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="description" content=`propstgonz - ${description}` />
+    <meta property="og:image" content={image} />
+  </head>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>
