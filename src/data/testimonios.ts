@@ -1,17 +1,9 @@
+import type { Testimonial } from "../types/testimonios";
 import personagenerica from "../assets/img/guy.png";
 import personagenerica2 from "../assets/img/avatar.png";
 import personagenerica3 from "../assets/img/personagenerica3.png"
 import personagenerica4 from "../assets/img/personagenerica4.png"
 import tecnico from "../assets/img/tecnico.png"
-
-export type Testimonial = {
-  name: string;
-  role?: string;
-  company?: string;
-  avatar?: string;
-  rating?: number;
-  quote: string;
-};
 
 export const testimonials: Testimonial[] = [
   {

@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { testimonials, type Testimonial } from '../data/testimonios';
+import { testimonials } from '../data/testimonios';
+import type { Testimonial } from '../types/testimonios';
 
 const id = 'testimonials-carousel';
 ---
@@ -9,7 +9,7 @@ const id = 'testimonials-carousel';
   id={id}
   tabindex="0"
   aria-label="Carrusel de testimonios"
-  class="relative w-full bg-white text-gray-800"
+  class="relative w-full bg-white text-gray-800 py-10"
 >
   <div class="mx-auto max-w-5xl">
     <header class="mb-6 text-center">
