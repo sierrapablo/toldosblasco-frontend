@@ -4,15 +4,19 @@ const selectedContainer = document.getElementById('selected-product-container');
 window.showProductDetail = (product) => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  if (heroContainer) heroContainer.classList.add('hidden');
+  if (!selectedContainer || !heroContainer) return;
 
-  if (!selectedContainer) return;
+  heroContainer.classList.add('transition-all', 'duration-500', 'opacity-0', 'scale-95');
+
+  setTimeout(() => {
+    heroContainer.classList.add('hidden');
+  }, 500);
 
   selectedContainer.innerHTML = '';
 
   const card = document.createElement('div');
   card.className =
-    'bg-white rounded-lg shadow p-6 mb-6 transform opacity-0 translate-y-6 transition-all duration-500';
+    'bg-white rounded-lg shadow p-6 mb-6 transform opacity-0 scale-95 transition-all duration-500';
   card.innerHTML = `
     <div class="flex flex-col md:flex-row gap-6">
       <img src="${product.imageUrl}" alt="${product.name}" class="w-full md:w-1/2 h-64 object-cover rounded-md" />
@@ -34,6 +38,6 @@ window.showProductDetail = (product) => {
   selectedContainer.appendChild(card);
 
   setTimeout(() => {
-    card.classList.remove('opacity-0', 'translate-y-6');
+    card.classList.remove('opacity-0', 'scale-95');
   }, 50);
 };
