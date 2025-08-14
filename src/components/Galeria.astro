@@ -1,5 +1,5 @@
 ---
-import { galerias } from "../data/galeria";
+import { galerias } from '../data/galeria';
 
 const url = new URL(Astro.request.url);
 const itemsPerPage = 9;
@@ -17,7 +17,7 @@ function getPageUrl(page: number) {
 
 <section class="container mx-auto px-4 py-8">
   <h2 class="text-3xl font-bold mb-2">Galerías</h2>
-  <p class="text-gray-500 mb-6">Explora nuestras colecciones de imágenes</p>
+  <p class="text-gray-500 mb-6">Explora nuestros trabajos anteriores</p>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {
@@ -25,7 +25,7 @@ function getPageUrl(page: number) {
         <div class="bg-white rounded-2xl shadow-md overflow-hidden transform transition hover:scale-105 hover:shadow-xl">
           <div
             class="overflow-hidden h-48 cursor-pointer"
-            onclick={`openLightbox('${galeria.imagenes[0]}')`}
+            onclick={`window.openLightbox && window.openLightbox(${JSON.stringify(galeria.imagenes[0])})`}
           >
             <img
               src={galeria.imagenes[0]}
@@ -80,8 +80,11 @@ function getPageUrl(page: number) {
 
 <div
   id="lightbox"
-  class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50"
-  onclick="closeLightbox(event)"
+  class="fixed inset-0 flex items-center justify-center hidden z-50"
+  style="background-color: rgba(0,0,0,0.4);"
+  onclick="window.closeLightbox && window.closeLightbox(event)"
 >
   <img id="lightbox-img" class="max-h-[90%] max-w-[90%] rounded-2xl shadow-xl" />
 </div>
+
+<script src="../scripts/galeria.js"></script>
