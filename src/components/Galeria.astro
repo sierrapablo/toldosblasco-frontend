@@ -1,0 +1,87 @@
+---
+import { galerias } from "../data/galeria";
+
+const url = new URL(Astro.request.url);
+const itemsPerPage = 9;
+const currentPage = parseInt(url.searchParams.get('page') ?? '1', 10);
+
+const totalPages = Math.ceil(galerias.length / itemsPerPage);
+const startIndex = (currentPage - 1) * itemsPerPage;
+const endIndex = startIndex + itemsPerPage;
+const currentGalerias = galerias.slice(startIndex, endIndex);
+
+function getPageUrl(page: number) {
+  return `?page=${page}`;
+}
+---
+
+<section class="container mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold mb-2">Galerías</h2>
+  <p class="text-gray-500 mb-6">Explora nuestras colecciones de imágenes</p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {
+      currentGalerias.map((galeria) => (
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden transform transition hover:scale-105 hover:shadow-xl">
+          <div
+            class="overflow-hidden h-48 cursor-pointer"
+            onclick={`openLightbox('${galeria.imagenes[0]}')`}
+          >
+            <img
+              src={galeria.imagenes[0]}
+              alt={galeria.titulo}
+              class="w-full h-full object-cover rounded-t-2xl transition-transform duration-300"
+            />
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-lg truncate">{galeria.titulo}</h3>
+            {galeria.descripcion && (
+              <p class="text-gray-600 text-sm line-clamp-2 mt-1">{galeria.descripcion}</p>
+            )}
+            {galeria.etiquetas && (
+              <div class="mt-2 flex flex-wrap gap-2">
+                {galeria.etiquetas.map((etiqueta) => (
+                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full">
+                    {etiqueta}
+                  </span>
+                ))}
+              </div>
+            )}
+            <p class="text-xs text-gray-500 mt-2">
+              Creado: {new Date(galeria.fechaCreacion).toLocaleDateString('es-ES')}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="flex justify-center items-center mt-8 space-x-2">
+    <a
+      href={getPageUrl(Math.max(1, currentPage - 1))}
+      class="px-3 py-1 border rounded text-gray-500 hover:bg-gray-100 transition">← Previo</a
+    >
+    {
+      Array.from({ length: totalPages }).map((_, i) => (
+        <a
+          href={getPageUrl(i + 1)}
+          class={`px-3 py-1 border rounded ${currentPage === i + 1 ? 'bg-blue-500 text-white border-blue-500' : 'text-gray-700 hover:bg-gray-100 transition'}`}
+        >
+          {i + 1}
+        </a>
+      ))
+    }
+    <a
+      href={getPageUrl(Math.min(totalPages, currentPage + 1))}
+      class="px-3 py-1 border rounded text-gray-500 hover:bg-gray-100 transition">Siguiente →</a
+    >
+  </div>
+</section>
+
+<div
+  id="lightbox"
+  class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50"
+  onclick="closeLightbox(event)"
+>
+  <img id="lightbox-img" class="max-h-[90%] max-w-[90%] rounded-2xl shadow-xl" />
+</div>
