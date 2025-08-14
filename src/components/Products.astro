@@ -5,7 +5,6 @@ import type { ProductProps } from '../types/product';
 const itemsPerPage = 12;
 const currentPage = parseInt(Astro.url.searchParams.get('page') ?? '1', 10);
 
-
 const totalPages = Math.ceil(products.length / itemsPerPage);
 const startIndex = (currentPage - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
@@ -20,10 +19,17 @@ function getPageUrl(page: number) {
   <h2 class="text-2xl font-semibold">Productos</h2>
   <p class="text-gray-500 mb-6">Echa un vistazo a nuestro catálogo</p>
 
+  <!-- Contenedor del producto seleccionado -->
+  <div id="selected-product-container"></div>
+
+  <!-- Lista de productos -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {
-      currentProducts.map((product: ProductProps, index) => (
-        <div class="bg-white rounded-lg shadow border p-4">
+      currentProducts.map((product: ProductProps) => (
+        <div
+          class="bg-white rounded-lg shadow border p-4 cursor-pointer"
+          onclick={`showProductDetail(${JSON.stringify(product)})`}
+        >
           <img
             src={product.imageUrl}
             alt={product.name}
@@ -37,6 +43,7 @@ function getPageUrl(page: number) {
     }
   </div>
 
+  <!-- Paginado -->
   <div class="flex justify-center items-center mt-8 space-x-2">
     <a
       href={getPageUrl(Math.max(1, currentPage - 1))}
@@ -65,4 +72,6 @@ function getPageUrl(page: number) {
       Siguiente →
     </a>
   </div>
+
+  <script src="../scripts/ProductModal.js"></script>
 </section>
