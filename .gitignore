@@ -23,4 +23,8 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# config de gitzen
 gitzen.config.json
+
+# script para ejecutar prettier y tras ello hacer commit con gitzen
+commit.sh
