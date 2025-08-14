@@ -1,0 +1,77 @@
+---
+import { products } from '../data/products';
+import type { ProductProps } from '../types/product';
+
+const itemsPerPage = 12;
+const currentPage = parseInt(Astro.url.searchParams.get('page') ?? '1', 10);
+
+const totalPages = Math.ceil(products.length / itemsPerPage);
+const startIndex = (currentPage - 1) * itemsPerPage;
+const endIndex = startIndex + itemsPerPage;
+const currentProducts = products.slice(startIndex, endIndex);
+
+function getPageUrl(page: number) {
+  return `?page=${page}`;
+}
+---
+
+<section class="container mx-auto px-4 py-8">
+  <h2 class="text-2xl font-semibold">Productos</h2>
+  <p class="text-gray-500 mb-6">Echa un vistazo a nuestro catálogo</p>
+
+  <!-- Contenedor del producto seleccionado -->
+  <div id="selected-product-container"></div>
+
+  <!-- Lista de productos -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {
+      currentProducts.map((product: ProductProps) => (
+        <div
+          class="bg-white rounded-lg shadow border p-4 cursor-pointer"
+          onclick={`showProductDetail(${JSON.stringify(product)})`}
+        >
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            class="w-full h-40 object-cover rounded-md mb-4"
+          />
+          <h3 class="font-semibold text-lg">{product.name}</h3>
+          <p class="text-gray-600 text-sm mb-2">{product.content}</p>
+          <p class="text-gray-900 font-bold">€{product.price}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Paginado -->
+  <div class="flex justify-center items-center mt-8 space-x-2">
+    <a
+      href={getPageUrl(Math.max(1, currentPage - 1))}
+      class="px-3 py-1 border rounded text-gray-500 hover:bg-gray-100"
+    >
+      ← Previo
+    </a>
+
+    {
+      Array.from({ length: totalPages }).map((_, i) => (
+        <a
+          href={getPageUrl(i + 1)}
+          class={`px-3 py-1 border rounded ${
+            currentPage === i + 1 ? 'bg-blue-500 text-white' : 'text-gray-700 hover:bg-gray-100'
+          }`}
+        >
+          {i + 1}
+        </a>
+      ))
+    }
+
+    <a
+      href={getPageUrl(Math.min(totalPages, currentPage + 1))}
+      class="px-3 py-1 border rounded text-gray-500 hover:bg-gray-100"
+    >
+      Siguiente →
+    </a>
+  </div>
+
+  <script src="../scripts/ProductModal.js"></script>
+</section>

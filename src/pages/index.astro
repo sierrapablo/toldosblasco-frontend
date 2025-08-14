@@ -1,16 +1,20 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import SobreNosotros from '../components/Sobre-Nosotros.astro';
+import ClientesOpinion from '../components/ClientesOpinion.astro';
 
+const PAGE_PROPS = {
+  title: 'Inicio',
+  description: 'Página web de Toldos Blasco.',
+  image: '/metaimage.png',
+};
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<Layout {...PAGE_PROPS}>
+  {/* Apartado "Quiénes somos" */}
+  <SobreNosotros />
+
+  {/* Carrusel de opiniones de clientes */}
+  <ClientesOpinion />
+  
+</Layout>
