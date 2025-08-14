@@ -1,8 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductsComp from "../components/Products.astro";
+
+const PAGE_PROPS = {
+  title: 'Productos',
+  description: 'Echa un vistazo a nuestros catálogo.',
+  image: '/metaimage.png',
+};
 ---
 
-<Layout>
+<Layout {...PAGE_PROPS}>
   <ProductsComp/>
 </Layout>
