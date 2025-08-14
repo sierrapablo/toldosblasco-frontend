@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Trimmed from "../layouts/Trimmed.astro";
 
 const PAGE_PROPS = {
   title: 'Contacto',
@@ -8,8 +8,8 @@ const PAGE_PROPS = {
 };
 ---
 
-<Layout {...PAGE_PROPS}>
-  <main class="flex-grow flex items-center justify-center px-4 py-10">
+<Trimmed {...PAGE_PROPS}>
+  <main class="flex-grow flex items-center justify-center px-4 py-20">
     <form
       action="#"
       method="post"
@@ -75,4 +75,4 @@ const PAGE_PROPS = {
       </button>
     </form>
   </main>
-</Layout>
+</Trimmed>
