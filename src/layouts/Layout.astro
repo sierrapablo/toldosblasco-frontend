@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import CallToAction from '../components/CallToAction.astro';
 
 const { title, description, image } = Astro.props;
 ---
@@ -17,9 +19,12 @@ const { title, description, image } = Astro.props;
     <meta property="og:image" content={image} />
   </head>
   <Header />
+  <Hero />
   <main>
     <slot />
   </main>
+  <CallToAction />
   <Footer />
+
 
 </html>

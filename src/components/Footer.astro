@@ -7,48 +7,77 @@ import twitter from '../assets/img/icons/twitter.png';
 import youtube from '../assets/img/icons/youtube.png';
 ---
 
-<footer class="border-t py-12 font-bold" style="border-color: #ffa726;">
-  <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="flex flex-col space-y-6">
+<footer class="border-t py-6 font-bold border-[#ffa726]">
+  <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-16 items-stretch">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="flex flex-col space-y-4 pl-0">
+        <Image src={logo} alt="logo" class="w-10 h-10" />
 
-      {/* Extraer RRSS de Fase Alterna Web y añadirle hover naranja */}
-      <Image src={logo} alt="logo" class="w-10 h-10" />
+        <div class="flex items-center space-x-4">
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:scale-110 transition"
+          >
+            <Image src={instagram} alt="Instagram" class="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:scale-110 transition"
+          >
+            <Image src={linkedin} alt="LinkedIn" class="w-5 h-5" />
+          </a>
+          <a
+            href="https://twitter.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:scale-110 transition"
+          >
+            <Image src={twitter} alt="Twitter" class="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.youtube.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:scale-110 transition"
+          >
+            <Image src={youtube} alt="YouTube" class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
 
-      <div class="flex items-center space-x-4">
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-          <Image src={instagram} alt="Instagram" class="w-5 h-5" />
-        </a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-          <Image src={linkedin} alt="LinkedIn" class="w-5 h-5" />
-        </a>
-        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-          <Image src={twitter} alt="Twitter" class="w-5 h-5" />
-        </a>
-        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
-          <Image src={youtube} alt="YouTube" class="w-5 h-5" />
-        </a>
+      <div>
+        <h3 class="font-semibold mb-3">Contacto</h3>
+        <ul class="space-y-1 text-sm">
+          <li>C/ Falsa, 123 A Springfield, EEUU</li>
+          <li>+34 666 777 888</li>
+          <li>hola@toldosblasco.es</li>
+          <li><a href="/contacto" class="hover:underline">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-semibold mb-3">Cómo podemos ayudarte</h3>
+        <ul class="space-y-1 text-sm">
+          <li><a href="/" class="hover:underline">Inicio</a></li>
+          <li><a href="#" class="hover:underline">Sobre Nosotros</a></li>
+          <li><a href="#" class="hover:underline">Servicios</a></li>
+          <li><a href="/galeria" class="hover:underline">Galería</a></li>
+          <li><a href="/contacto" class="hover:underline">Presupuesto</a></li>
+        </ul>
       </div>
     </div>
 
-    <div>
-      <h3 class="font-semibold mb-4">Contacto</h3>
-      <ul class="space-y-2 text-sm">
-        <li>C/ Falsa, 123 A Springfield, EEUU</li>
-        <li>+34 666 777 888</li>
-        <li>hola@toldosblasco.es</li>
-        <li><a href="#" class="hover:underline">Contacto</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h3 class="font-semibold mb-4">Cómo podemos ayudarte</h3>
-      <ul class="space-y-2 text-sm">
-        <li><a href="#" class="hover:underline">Inicio</a></li>
-        <li><a href="#" class="hover:underline">Sobre Nosotros</a></li>
-        <li><a href="#" class="hover:underline">Servicios</a></li>
-        <li><a href="#" class="hover:underline">Galería</a></li>
-        <li><a href="#" class="hover:underline">Presupuesto</a></li>
-      </ul>
+    <div class="h-full w-[250px]">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d49469.671123206914!2d-0.299506!3d39.200756!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd61c9c287271db7%3A0xc32fe368fb499593!2sToldos%20Blasco!5e0!3m2!1sen!2sus!4v1755151748180!5m2!1sen!2sus"
+        class="w-full h-full border-0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </footer>
