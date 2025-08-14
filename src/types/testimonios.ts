@@ -5,4 +5,4 @@ export interface Testimonial {
   avatar?: string;
   rating?: number;
   quote: string;
-};
+}

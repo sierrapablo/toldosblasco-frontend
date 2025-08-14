@@ -1,9 +1,9 @@
-import type { Testimonial } from "../types/testimonios";
-import personagenerica from "../assets/img/guy.png";
-import personagenerica2 from "../assets/img/avatar.png";
-import personagenerica3 from "../assets/img/personagenerica3.png"
-import personagenerica4 from "../assets/img/personagenerica4.png"
-import tecnico from "../assets/img/tecnico.png"
+import type { Testimonial } from '../types/testimonios';
+import personagenerica from '../assets/img/guy.png';
+import personagenerica2 from '../assets/img/avatar.png';
+import personagenerica3 from '../assets/img/personagenerica3.png';
+import personagenerica4 from '../assets/img/personagenerica4.png';
+import tecnico from '../assets/img/tecnico.png';
 
 export const testimonials: Testimonial[] = [
   {
@@ -21,8 +21,7 @@ export const testimonials: Testimonial[] = [
     company: 'Dropify',
     avatar: personagenerica2.src,
     rating: 4,
-    quote: 
-      'Entrega puntual y una comunicación muy fluida durante todo el proyecto.',
+    quote: 'Entrega puntual y una comunicación muy fluida durante todo el proyecto.',
   },
   {
     name: 'Sara R.',
@@ -30,8 +29,7 @@ export const testimonials: Testimonial[] = [
     company: 'Nexa',
     avatar: personagenerica3.src,
     rating: 5,
-    quote: 
-      'Entendieron perfectamente nuestras necesidades y lo clavaron a la primera.',
+    quote: 'Entendieron perfectamente nuestras necesidades y lo clavaron a la primera.',
   },
   {
     name: 'Javier C.',
@@ -39,8 +37,7 @@ export const testimonials: Testimonial[] = [
     company: 'Boldly',
     avatar: personagenerica4.src,
     rating: 5,
-    quote: 
-      'Excelente relación calidad-precio. El soporte post-lanzamiento es de 10.',
+    quote: 'Excelente relación calidad-precio. El soporte post-lanzamiento es de 10.',
   },
   {
     name: 'Jose N.',
@@ -48,7 +45,6 @@ export const testimonials: Testimonial[] = [
     company: 'BaronetteSystems',
     avatar: tecnico.src,
     rating: 5,
-    quote: 
-      'Hola.',
+    quote: 'Hola.',
   },
 ];
