@@ -1,6 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Trimmed from '../layouts/Trimmed.astro';
 import GaleriaComponent from '../components/Galeria.astro';
+import CallToAction from '../components/CallToAction.astro';
 
 const PAGE_PROPS = {
   title: 'Galería',
@@ -9,6 +10,11 @@ const PAGE_PROPS = {
 };
 ---
 
-<Layout {...PAGE_PROPS}>
+<Trimmed {...PAGE_PROPS}>
+  {/* Galería */}
   <GaleriaComponent />
-</Layout>
+
+  {/* El apartado de contacto */}
+  <CallToAction />
+
+</Trimmed>

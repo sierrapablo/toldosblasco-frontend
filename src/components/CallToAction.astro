@@ -5,7 +5,7 @@ import { getImage } from 'astro:assets';
 const { src } = await getImage({ src: fondo });
 ---
 
-<section class="w-full bg-center bg-cover h-[38rem]" style={`background-image: url('${src}');`}>
+<section class="w-full bg-center bg-cover h-[20rem] lg:h-[20rem]" style={`background-image: url('${src}');`}>
   <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
     <div class="text-center">
       <h1 class="text-4xl font-semibold text-white lg:text-5xl">

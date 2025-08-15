@@ -5,13 +5,15 @@ export const products: ProductProps[] = [
     name: 'Toldo 1',
     content: 'Toldo color beige',
     price: 100,
-    imageUrl: 'https://via.placeholder.com/150',
+    imageUrl:
+      'https://media.discordapp.net/attachments/1026874300407484498/1392434136022650942/Gu55NTFWgAEWint.png?ex=689fa398&is=689e5218&hm=40c9dd8a66c7b97ed051ae87d84940ad19df55f307a45cda16343429b8457bb6&=&format=webp&quality=lossless&width=793&height=960',
   },
   {
     name: 'Toldo 2',
     content: 'Toldo color azul',
     price: 100,
-    imageUrl: 'https://via.placeholder.com/150',
+    imageUrl:
+      'https://media.discordapp.net/attachments/1026874300407484498/1392434124463018085/Gu67IF4WsAEW6b2.png?ex=689fa395&is=689e5215&hm=c241655c53a1ddf88bc84f8bcc818e9025a1c4443d47dcfec6aff3fd8c0cfcfd&=&format=webp&quality=lossless',
   },
   {
     name: 'Toldo 3',
