@@ -1,0 +1,66 @@
+  <main class="flex-grow flex items-center justify-center px-4 py-20">
+    <form
+      action="#"
+      method="post"
+      class="w-full max-w-md bg-white p-6 rounded-2xl shadow-lg space-y-4"
+    >
+      <div>
+        <label for="company" class="block text-sm font-medium text-slate-800"
+          >Empresa (opcional)</label
+        >
+        <input
+          type="text"
+          id="company"
+          name="company"
+          placeholder="Nombre de tu empresa"
+          class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <label for="name" class="block text-sm font-medium text-slate-800">Nombre y apellidos</label
+        >
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          placeholder="Tu nombre"
+          class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-slate-800"
+          >Correo electrónico</label
+        >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          placeholder="correo@ejemplo.es"
+          class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-medium text-slate-800">Mensaje</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          placeholder="Escribe tu mensaje"
+          class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-orange-400 hover:bg-orange-600 text-white font-medium py-2.5 rounded-xl transition"
+      >
+        Enviar
+      </button>
+    </form>
+  </main>
