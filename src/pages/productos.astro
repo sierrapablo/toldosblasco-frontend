@@ -1,6 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ProductsComp from "../components/Products.astro";
+import Trimmed from '../layouts/Trimmed.astro';
+import ProductsComp from '../components/Products.astro';
+import CallToAction from '../components/CallToAction.astro';
 
 const PAGE_PROPS = {
   title: 'Productos',
@@ -9,6 +10,7 @@ const PAGE_PROPS = {
 };
 ---
 
-<Layout {...PAGE_PROPS}>
-  <ProductsComp/>
-</Layout>
+<Trimmed {...PAGE_PROPS}>
+  <ProductsComp />
+  <CallToAction />
+</Trimmed>
