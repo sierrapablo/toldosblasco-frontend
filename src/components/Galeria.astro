@@ -56,25 +56,13 @@ function getPageUrl(page: number) {
     }
   </div>
 
-  <div class="flex justify-center items-center mt-8 space-x-2">
-    <a
-      href={getPageUrl(Math.max(1, currentPage - 1))}
-      class="px-3 py-1 border rounded text-gray-500 hover:bg-gray-100 transition">← Previo</a
-    >
-    {
-      Array.from({ length: totalPages }).map((_, i) => (
-        <a
-          href={getPageUrl(i + 1)}
-          class={`px-3 py-1 border rounded ${currentPage === i + 1 ? 'bg-blue-500 text-white border-blue-500' : 'text-gray-700 hover:bg-gray-100 transition'}`}
-        >
-          {i + 1}
-        </a>
-      ))
-    }
-    <a
-      href={getPageUrl(Math.min(totalPages, currentPage + 1))}
-      class="px-3 py-1 border rounded text-gray-500 hover:bg-gray-100 transition">Siguiente →</a
-    >
+  <!-- Contenedor para que paginacion.js inserte los botones -->
+  <div
+    id="pagination"
+    class="flex justify-center items-center mt-8 space-x-2"
+    data-total={totalPages}
+    data-current={currentPage}
+  >
   </div>
 </section>
 
@@ -88,3 +76,4 @@ function getPageUrl(page: number) {
 </div>
 
 <script src="../scripts/galeria.js"></script>
+<script src="../scripts/paginacion.js"></script>
