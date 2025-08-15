@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const a = document.createElement('a');
       a.href = `?page=${page}`;
       a.textContent = label || page;
-      a.className = `px-3 py-1 border rounded transition ${
+      a.className = `px-2 sm:px-3 py-1 border rounded text-sm sm:text-base transition ${
         disabled
           ? 'text-gray-400 cursor-not-allowed'
           : page === currentPage
-            ? 'bg-blue-500 text-white border-blue-500'
+            ? 'bg-orange-400 text-white border-black-500'
             : 'text-gray-700 hover:bg-gray-100'
       }`;
       if (disabled) a.addEventListener('click', (e) => e.preventDefault());
@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const maxButtons = 4;
+
+    paginationContainer.appendChild(createLink(1, '«', currentPage === 1));
+
+    paginationContainer.appendChild(
+      createLink(Math.max(1, currentPage - 1), '←', currentPage === 1),
+    );
 
     let startPage = currentPage - Math.floor(maxButtons / 2);
     let endPage = startPage + maxButtons - 1;
@@ -38,14 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (startPage < 1) startPage = 1;
     }
 
-    paginationContainer.appendChild(
-      createLink(Math.max(1, currentPage - 1), '←', currentPage === 1),
-    );
-
     if (startPage > 1) {
       const dots = document.createElement('span');
       dots.textContent = '...';
-      dots.className = 'px-2 text-gray-500';
+      dots.className = 'px-1 sm:px-2 text-gray-500 text-sm sm:text-base';
       paginationContainer.appendChild(dots);
     }
 
@@ -56,13 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (endPage < totalPages) {
       const dots = document.createElement('span');
       dots.textContent = '...';
-      dots.className = 'px-2 text-gray-500';
+      dots.className = 'px-1 sm:px-2 text-gray-500 text-sm sm:text-base';
       paginationContainer.appendChild(dots);
     }
 
     paginationContainer.appendChild(
       createLink(Math.min(totalPages, currentPage + 1), '→', currentPage === totalPages),
     );
+
+    paginationContainer.appendChild(createLink(totalPages, '»', currentPage === totalPages));
 
     paginationContainer.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', (event) => {
