@@ -4,15 +4,52 @@ import logo from '../assets/img/logo.png';
 ---
 
 <header class="border-b">
-  <div class="max-w-7xl mx-auto flex items-center justify-between py-3 px-4">
-    <div class="flex items-left">
-      <Image src={logo} alt="logo" class="w-10 h-10" />
+  <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 md:px-0 relative">
+    <div class="flex-shrink-0">
+      <Image src={logo} alt="Logo" class="w-12 h-12" loading="eager" />
     </div>
-    <nav class="flex items-center space-x-6 text-sm text-black">
-      <a href="/" class="hover:text-gray-600">Inicio</a>
-      <a href="/productos" class="hover:text-gray-600">Productos</a>
-      <a href="/galeria" class="hover:text-gray-600">Galería</a>
-      <a href="/contacto" class="hover:text-gray-600">Contacto</a>
+
+    <nav
+      class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-6 text-sm text-black"
+    >
+      <a href="/" class="hover:text-gray-600 transition-colors">Inicio</a>
+      <a href="/productos" class="hover:text-gray-600 transition-colors">Productos</a>
+      <a href="/galeria" class="hover:text-gray-600 transition-colors">Galería</a>
+      <a href="/contacto" class="hover:text-gray-600 transition-colors">Contacto</a>
+    </nav>
+
+    <button id="menu-toggle" class="md:hidden text-black focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="md:hidden max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out px-4"
+  >
+    <nav class="flex flex-col space-y-2 text-sm text-black py-2">
+      <a href="/" class="hover:text-gray-600 transition-colors">Inicio</a>
+      <a href="/productos" class="hover:text-gray-600 transition-colors">Productos</a>
+      <a href="/galeria" class="hover:text-gray-600 transition-colors">Galería</a>
+      <a href="/contacto" class="hover:text-gray-600 transition-colors">Contacto</a>
     </nav>
   </div>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    toggle?.addEventListener('click', () => {
+      if (mobileMenu) {
+        const isOpen = mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== '0px';
+        mobileMenu.style.maxHeight = isOpen ? '0' : mobileMenu.scrollHeight + 'px';
+      }
+    });
+  </script>
 </header>
