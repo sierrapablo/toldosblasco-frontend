@@ -15,14 +15,16 @@ const startIndex = (currentPage - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
 const currentProducts = products.slice(startIndex, endIndex);
 
-function getPageUrl(page: number) {
-  const params = new URLSearchParams(Astro.url.searchParams);
-  params.set('page', String(page));
-  return `?${params.toString()}`;
-}
+const { heroTitle, heroCTAButton, heroImage, heroLink } = Astro.props;
+const HERO_PROPS = {
+  title: heroTitle,
+  ctaButton: heroCTAButton,
+  image: heroImage,
+  heroLink: heroLink,
+};
 ---
 
-{!selectedProduct && <Hero />}
+{!selectedProduct && <Hero {...HERO_PROPS}/>}
 <style is:global>
   {
     display: none !important;
@@ -88,7 +90,6 @@ function getPageUrl(page: number) {
   <script src="../scripts/paginacion.js"></script>
   <script type="module">
     const heroContainer = document.getElementById('hero-container');
-    const selectedContainer = document.getElementById('selected-product-container');
 
     function hideHeroInstant() {
       if (!heroContainer) return;

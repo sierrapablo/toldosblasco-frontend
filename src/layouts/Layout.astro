@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import CallToAction from '../components/CallToAction.astro';
 
-const { title, description, image } = Astro.props;
+const { title, description, image, heroTitle, heroCTAButton, heroImage, heroLink } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,7 +19,7 @@ const { title, description, image } = Astro.props;
     <meta property="og:image" content={image} />
   </head>
   <Header />
-  <Hero />
+  <Hero title={heroTitle} ctaButton={heroCTAButton} image={heroImage} heroLink={heroLink} />
   <main>
     <slot />
   </main>

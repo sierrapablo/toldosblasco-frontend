@@ -8,9 +8,16 @@ const PAGE_PROPS = {
   description: 'Echa un vistazo a nuestros catálogo.',
   image: '/metaimage.png',
 };
+
+const HERO_PROPS = {
+  heroTitle: 'Nuestros productos',
+  heroCTAButton: 'Galería',
+  heroImage: '/src/assets/img/muestra.jpg',
+  heroLink: '/galeria',
+};
 ---
 
 <Trimmed {...PAGE_PROPS}>
-  <ProductsComp />
+  <ProductsComp {...HERO_PROPS} />
   <CallToAction />
 </Trimmed>
