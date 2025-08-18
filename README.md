@@ -35,8 +35,8 @@ All commands are run from the root of the project, from a terminal:
 
 ### Navbar
 
-- [ ] El icono de la empresa (a la izquierda) debe llevar a "/"
-- [ ] La posición del navbar tiene que ser siempre visible en el top de la página (sticky en tailwindcss).
+- [x] El icono de la empresa (a la izquierda) debe llevar a "/"
+- [x] La posición del navbar tiene que ser siempre visible en el top de la página (sticky en tailwindcss).
 
 ### Productos
 
@@ -45,14 +45,15 @@ All commands are run from the root of the project, from a terminal:
 ### Galería
 
 - [ ] Hacer el modal más grande para que las imágenes se vean bien.
-- [ ] Oscurecer un poco más el fondo del modal.
-- [ ] Añadir elemento "X" en una esquina del modal, para cerrar el modal.
+- [x] Oscurecer un poco más el fondo del modal.
+- [x] Añadir elemento "X" en una esquina del modal, para cerrar el modal.
 
 ### Contacto
 
-- [ ] Añadir botón de "Contactar por Whatsapp".
+- [x] Añadir botón de "Contactar por Whatsapp".
   - Debe ser un botón verde con el icono de whatsapp.
 
 ### General
+
 - [ ] Implementar transición generalizada desde enlaces internos con ClientRouter.
 - [ ] Preparar Astro server islands para minimizar SSR.
