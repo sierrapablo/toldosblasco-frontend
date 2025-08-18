@@ -54,9 +54,9 @@ export const galerias: Galeria[] = [
     titulo: 'Playas paradisíacas',
     descripcion: 'Arenas blancas, agua cristalina y paisajes de ensueño.',
     imagenes: [
-      'https://picsum.photos/id/1055/800/600',
-      'https://picsum.photos/id/1065/800/600',
-      'https://picsum.photos/id/1070/800/600',
+      'https://media.discordapp.net/attachments/1026874300407484498/1392435408570421329/GtgGLhsXsAAe0jF.png?ex=68a44207&is=68a2f087&hm=756663cb24ab58c176d3abbfaba66f8ffe127267e1325de2a73465d140dc5ea6&=&format=webp&quality=lossless',
+      'https://media.discordapp.net/attachments/1026874300407484498/1392435408570421329/GtgGLhsXsAAe0jF.png?ex=68a44207&is=68a2f087&hm=756663cb24ab58c176d3abbfaba66f8ffe127267e1325de2a73465d140dc5ea6&=&format=webp&quality=lossless',
+      'https://media.discordapp.net/attachments/1026874300407484498/1392435408570421329/GtgGLhsXsAAe0jF.png?ex=68a44207&is=68a2f087&hm=756663cb24ab58c176d3abbfaba66f8ffe127267e1325de2a73465d140dc5ea6&=&format=webp&quality=lossless',
     ],
     fechaCreacion: new Date('2025-04-01'),
     etiquetas: ['playa', 'vacaciones', 'relax'],
