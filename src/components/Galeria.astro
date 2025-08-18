@@ -9,10 +9,6 @@ const totalPages = Math.ceil(galerias.length / itemsPerPage);
 const startIndex = (currentPage - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
 const currentGalerias = galerias.slice(startIndex, endIndex);
-
-function getPageUrl(page: number) {
-  return `?page=${page}`;
-}
 ---
 
 <section class="container mx-auto px-4 py-8">
@@ -56,7 +52,6 @@ function getPageUrl(page: number) {
     }
   </div>
 
-  <!-- Contenedor para que paginacion.js inserte los botones -->
   <div
     id="pagination"
     class="flex justify-center items-center mt-8 space-x-2"
@@ -68,11 +63,23 @@ function getPageUrl(page: number) {
 
 <div
   id="lightbox"
-  class="fixed inset-0 flex items-center justify-center hidden z-50"
-  style="background-color: rgba(0,0,0,0.4);"
-  onclick="window.closeLightbox && window.closeLightbox(event)"
+  class="fixed inset-0 hidden z-50 bg-black/95 p-2 md:p-6 flex items-center justify-center"
+  aria-modal="true"
+  role="dialog"
 >
-  <img id="lightbox-img" class="max-h-[90%] max-w-[90%] rounded-2xl shadow-xl" />
+  <button
+    id="close-lightbox"
+    type="button"
+    class="absolute top-5 right-5 md:top-6 md:right-6 w-12 h-12 rounded-full bg-black/60 text-white hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/70 grid place-items-center"
+  >
+    <span aria-hidden="true" class="text-2xl leading-none">✕</span>
+    <span class="sr-only">Cerrar</span>
+  </button>
+
+  <img
+    id="lightbox-img"
+    class="block mx-auto max-h-[98vh] max-w-[98vw] md:max-h-[95vh] md:max-w-[95vw] rounded-2xl shadow-2xl object-contain transition-transform duration-300 ease-in-out cursor-zoom-in"
+  />
 </div>
 
 <script src="../scripts/galeria.js"></script>
