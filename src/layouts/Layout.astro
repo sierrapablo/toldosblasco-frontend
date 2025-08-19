@@ -4,8 +4,10 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import CallToAction from '../components/CallToAction.astro';
+import { ClientRouter, fade } from 'astro:transitions';
 
 const { title, description, image, heroTitle, heroCTAButton, heroImage, heroLink } = Astro.props;
+export const prerender = true;
 ---
 
 <!doctype html>
@@ -17,14 +19,15 @@ const { title, description, image, heroTitle, heroCTAButton, heroImage, heroLink
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="description" content=`Toldos Blasco - ${description}` />
     <meta property="og:image" content={image} />
+    <ClientRouter />
   </head>
-  <Header />
-  <Hero title={heroTitle} ctaButton={heroCTAButton} image={heroImage} heroLink={heroLink} />
-  <main>
-    <slot />
-  </main>
-  <CallToAction />
-  <Footer />
-
-
+  <body transition:animate={fade({ duration: '1s' })}>
+    <Header />
+    <Hero title={heroTitle} ctaButton={heroCTAButton} image={heroImage} heroLink={heroLink} />
+    <main>
+      <slot />
+    </main>
+    <CallToAction />
+    <Footer />
+  </body>
 </html>
