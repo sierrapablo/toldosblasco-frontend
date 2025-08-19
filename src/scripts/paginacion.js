@@ -8,9 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderPagination() {
     paginationContainer.innerHTML = '';
 
+    const currentUrl = new URL(window.location.href);
+    const selected = currentUrl.searchParams.get('selected');
+
     const createLink = (page, label = null, disabled = false) => {
       const a = document.createElement('a');
-      a.href = `?page=${page}`;
+
+      const pageUrl = new URL(window.location.origin + window.location.pathname);
+      pageUrl.searchParams.set('page', page);
+      if (selected) pageUrl.searchParams.set('selected', selected);
+
+      a.href = pageUrl.toString();
       a.textContent = label || page;
       a.className = `px-2 sm:px-3 py-1 border rounded text-sm sm:text-base transition ${
         disabled
@@ -19,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ? 'bg-orange-400 text-white border-black-500'
             : 'text-gray-700 hover:bg-gray-100'
       }`;
+
       if (disabled) a.addEventListener('click', (e) => e.preventDefault());
       return a;
     };
@@ -26,14 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxButtons = 4;
 
     paginationContainer.appendChild(createLink(1, '«', currentPage === 1));
-
     paginationContainer.appendChild(
       createLink(Math.max(1, currentPage - 1), '←', currentPage === 1),
     );
 
     let startPage = currentPage - Math.floor(maxButtons / 2);
     let endPage = startPage + maxButtons - 1;
-
     if (startPage < 1) {
       startPage = 1;
       endPage = maxButtons;
@@ -65,18 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
     paginationContainer.appendChild(
       createLink(Math.min(totalPages, currentPage + 1), '→', currentPage === totalPages),
     );
-
     paginationContainer.appendChild(createLink(totalPages, '»', currentPage === totalPages));
 
     paginationContainer.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', (event) => {
         event.preventDefault();
-        const target = new URL(link.href, window.location.origin);
-        const current = new URL(window.location.href);
-
-        if (!target.searchParams.has('selected') && current.searchParams.has('selected')) {
-          target.searchParams.set('selected', current.searchParams.get('selected'));
-        }
+        const target = new URL(link.href);
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => {
