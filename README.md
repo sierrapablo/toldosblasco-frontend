@@ -36,15 +36,15 @@ All commands are run from the root of the project, from a terminal:
 ### Navbar
 
 - [x] El icono de la empresa (a la izquierda) debe llevar a "/"
-- [x] La posición del navbar tiene que ser siempre visible en el top de la página (sticky en tailwindcss).
 
 ### Productos
 
-- [ ] El tamaño de la info card de los productos debe ser del mismo tamaño que el Hero. Además, debe de superponerse al componente Hero, no sustituirlo.
+- [x] El tamaño de la info card de los productos debe ser del mismo tamaño que el Hero. Además, debe de superponerse al componente Hero, no sustituirlo.
 
 ### Galería
 
 - [ ] Hacer el modal más grande para que las imágenes se vean bien.
+- [ ] Centrar las imágenes en el modal.
 - [x] Oscurecer un poco más el fondo del modal.
 - [x] Añadir elemento "X" en una esquina del modal, para cerrar el modal.
 
