@@ -1,5 +1,6 @@
 ---
 import { galerias } from '../data/galeria';
+import { Image } from 'astro:assets';
 
 const url = new URL(Astro.request.url);
 const itemsPerPage = 9;
@@ -21,31 +22,16 @@ const currentGalerias = galerias.slice(startIndex, endIndex);
         <div class="bg-white rounded-2xl shadow-md overflow-hidden transform transition hover:scale-105 hover:shadow-xl">
           <div
             class="overflow-hidden h-48 cursor-pointer"
-            onclick={`window.openLightbox && window.openLightbox(${JSON.stringify(galeria.imagenes[0])})`}
+            onclick={`window.openLightbox && window.openLightbox(${JSON.stringify(galeria.imagen)})`}
           >
-            <img
-              src={galeria.imagenes[0]}
+            <Image
+              src={galeria.imagen}
               alt={galeria.titulo}
+              width={800}
+              height={600}
+              loading="eager"
               class="w-full h-full object-cover rounded-t-2xl transition-transform duration-300"
             />
-          </div>
-          <div class="p-4">
-            <h3 class="font-semibold text-lg truncate">{galeria.titulo}</h3>
-            {galeria.descripcion && (
-              <p class="text-gray-600 text-sm line-clamp-2 mt-1">{galeria.descripcion}</p>
-            )}
-            {galeria.etiquetas && (
-              <div class="mt-2 flex flex-wrap gap-2">
-                {galeria.etiquetas.map((etiqueta) => (
-                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full">
-                    {etiqueta}
-                  </span>
-                ))}
-              </div>
-            )}
-            <p class="text-xs text-gray-500 mt-2">
-              Creado: {new Date(galeria.fechaCreacion).toLocaleDateString('es-ES')}
-            </p>
           </div>
         </div>
       ))
