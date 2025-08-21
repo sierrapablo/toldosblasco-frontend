@@ -24,22 +24,31 @@ const { products, currentPage, totalPages, totalProducts } = Astro.props;
     <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {
         products.map((product: ProductProps) => (
-          <div class="bg-white rounded-lg shadow-md border border-gray-100 p-4 cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              class="w-full h-64 object-cover rounded-md"
-              width={600}
-              height={400}
-              loading="lazy"
-            />
-            <h3 class="font-semibold text-lg mt-4">{product.name}</h3>
-            <p class="text-gray-600 text-sm mb-2 line-clamp-2">{product.content}</p>
-            <p class="text-gray-900 font-bold text-lg">€{product.price}</p>
-            {product.tags &&
-              product.tags.map((tag: string) => (
-                <span class="bg-amber-500 text-white rounded-full px-2 py-1 mt-2 mx-1">{tag}</span>
-              ))}
+          <div class="group bg-white rounded-lg shadow-md border border-gray-100 p-4 cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden md:h-96">
+            {/* Contenedor de la imagen */}
+            <div class="md:absolute inset-0 z-10 transition-all duration-500 md:group-hover:scale-95 md:group-hover:translate-y-[-45%] md:group-hover:opacity-90">
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                class="w-full h-64 md:h-full object-cover rounded-md"
+                width={600}
+                height={400}
+                loading="lazy"
+              />
+            </div>
+
+            {/* Contenido - siempre visible en móviles, revelado con hover en desktop */}
+            <div class="mt-4 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 md:absolute md:bottom-0 md:left-0 md:right-0 z-20 md:p-4 md:bg-gradient-to-t md:from-white md:via-white/95 md:to-transparent md:pt-16">
+              <h3 class="font-semibold text-lg">{product.name}</h3>
+              <p class="text-gray-600 text-sm mb-2 line-clamp-2">{product.content}</p>
+              <p class="text-gray-900 font-bold text-lg">€{product.price}</p>
+              {product.tags &&
+                product.tags.map((tag: string) => (
+                  <span class="bg-amber-500 text-white rounded-full px-2 py-1 mt-2 mx-1 text-xs inline-block">
+                    {tag}
+                  </span>
+                ))}
+            </div>
           </div>
         ))
       }
