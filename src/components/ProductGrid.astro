@@ -1,0 +1,73 @@
+---
+import type { ProductProps } from '../types/product';
+import { Image } from 'astro:assets';
+import Pagination from './Pagination.astro';
+
+interface Props {
+  products: ProductProps[];
+  currentPage: number;
+  totalPages: number;
+  totalProducts: number;
+}
+
+const { products, currentPage, totalPages, totalProducts } = Astro.props;
+---
+
+<section class="container mx-auto px-4 py-8 relative">
+  {/* Contador de productos */}
+  <div class="mb-6 text-gray-600 text-sm text-center">
+    Mostrando <span class="font-semibold">{Math.min(products.length, 9)}</span> de
+    <span class="font-semibold"> {totalProducts}</span> productos
+  </div>
+
+  <div class="relative z-0 mt-4">
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        products.map((product: ProductProps) => (
+          <div class="bg-white rounded-lg shadow-md border border-gray-100 p-4 cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <Image
+              src={product.imageUrl}
+              alt={product.name}
+              class="w-full h-64 object-cover rounded-md"
+              width={600}
+              height={400}
+              loading="lazy"
+            />
+            <h3 class="font-semibold text-lg mt-4">{product.name}</h3>
+            <p class="text-gray-600 text-sm mb-2 line-clamp-2">{product.content}</p>
+            <p class="text-gray-900 font-bold text-lg">€{product.price}</p>
+            {product.tags &&
+              product.tags.map((tag: string) => (
+                <span class="bg-amber-500 text-white rounded-full px-2 py-1 mt-2 mx-1">{tag}</span>
+              ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  {/* Componente de paginación */}
+  {
+    totalPages > 1 && (
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        baseUrl="/productos"
+        server:defer
+      />
+    )
+  }
+</section>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .transition-all {
+    transition: all 0.3s ease;
+  }
+</style>
