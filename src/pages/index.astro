@@ -12,6 +12,7 @@ const PAGE_PROPS = {
   heroImage: '/src/assets/img/hero/hero.jpg',
   heroLink: '/productos',
 };
+export const prerender = true;
 ---
 
 <Layout {...PAGE_PROPS}>
@@ -19,6 +20,5 @@ const PAGE_PROPS = {
   <SobreNosotros />
 
   {/* Carrusel de opiniones de clientes */}
-  <ClientesOpinion server:defer/>
-  
+  <ClientesOpinion server:defer />
 </Layout>
