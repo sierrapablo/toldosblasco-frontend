@@ -1,12 +1,14 @@
 ---
 import fondo from '../assets/img/calltoaction/CallToAction.jpeg';
-import { getImage } from 'astro:assets';
-
-const { src } = await getImage({ src: fondo });
+import { Image } from 'astro:assets';
 ---
 
-<section class="w-full bg-center bg-cover h-[20rem] lg:h-[20rem]" style={`background-image: url('${src}');`}>
-  <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
+<section class="relative w-full h-[20rem] lg:h-[20rem] overflow-hidden">
+  <Image src={fondo} alt="Call to Action" class="absolute inset-0 w-full h-full object-cover" />
+
+  <div class="absolute inset-0 bg-gray-900/40"></div>
+
+  <div class="relative flex items-center justify-center w-full h-full">
     <div class="text-center">
       <h1 class="text-4xl font-semibold text-white lg:text-5xl">
         Estaremos encantados de atenderte...
