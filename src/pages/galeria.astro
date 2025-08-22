@@ -1,20 +1,19 @@
 ---
-import Trimmed from '../layouts/Trimmed.astro';
+import Layout from '../layouts/Layout.astro';
 import GaleriaComponent from '../components/Galeria.astro';
-import CallToAction from '../components/CallToAction.astro';
 
 const PAGE_PROPS = {
   title: 'Galería',
   description: 'Galería de Toldos Blasco.',
   image: '/metaimage.png',
+  heroTitle: 'Galería de imágenes',
+  heroCTAButton: 'Contacta con nosotros',
+  heroImage: '/src/assets/img/hero/hero.jpg',
+  heroLink: '/contacto',
 };
 ---
 
-<Trimmed {...PAGE_PROPS}>
+<Layout {...PAGE_PROPS}>
   {/* Galería */}
   <GaleriaComponent />
-
-  {/* El apartado de contacto */}
-  <CallToAction />
-
-</Trimmed>
+</Layout>

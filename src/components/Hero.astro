@@ -1,26 +1,31 @@
 ---
-import fondo from '../assets/img/hero/hero.jpg';
-import { getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 
-const { src } = await getImage({ src: fondo });
+import heroImg from '../assets/img/hero/hero.jpg';
+
+const { title, ctaButton, heroLink } = Astro.props;
 ---
 
-<section
-  id="hero-container"
-  class="w-full bg-center bg-cover h-[42rem]"
-  style={`background-image: url('${src}');`}
->
-  <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
-    <div class="text-center">
-      <h1 class="text-4xl font-semibold text-white lg:text-5xl">
-        Visualiza alguno de nuestros trabajos
-      </h1>
+<section id="hero-container" class="w-full h-[42rem] relative overflow-hidden">
+  <Image
+    src={heroImg}
+    alt={title}
+    class="absolute inset-0 w-full h-full object-cover"
+    aria-hidden="true"
+    loading="eager"
+  />
 
+  <div
+    id="hero-text-overlay"
+    class="flex items-center justify-center w-full h-full bg-gray-900/40 transition-opacity duration-500 relative z-10"
+  >
+    <div class="text-center">
+      <h1 class="text-4xl font-semibold text-white lg:text-5xl">{title}</h1>
       <a
-        href="/galeria"
+        href={heroLink}
         class="inline-block px-6 py-3 mt-6 text-lg font-medium text-white capitalize transition-colors duration-300 transform bg-orange-400 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
       >
-        Galería
+        {ctaButton}
       </a>
     </div>
   </div>

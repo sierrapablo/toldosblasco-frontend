@@ -2,6 +2,7 @@
 import { products } from '../data/products';
 import type { ProductProps } from '../types/product';
 import Hero from './Hero.astro';
+import { Image } from 'astro:assets';
 
 const itemsPerPage = 12;
 const currentPage = parseInt(Astro.url.searchParams.get('page') ?? '1', 10);
@@ -15,94 +16,275 @@ const startIndex = (currentPage - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
 const currentProducts = products.slice(startIndex, endIndex);
 
-function getPageUrl(page: number) {
-  const params = new URLSearchParams(Astro.url.searchParams);
-  params.set('page', String(page));
-  return `?${params.toString()}`;
-}
+const { heroTitle, heroCTAButton, heroImage, heroLink } = Astro.props;
+const HERO_PROPS = {
+  title: heroTitle,
+  ctaButton: heroCTAButton,
+  image: heroImage,
+  heroLink: heroLink,
+};
 ---
 
-{!selectedProduct && <Hero />}
-<style is:global>
-  {
-    display: none !important;
-    opacity: 0 !important;
-  }
-</style>
+<Hero {...HERO_PROPS} />
 
-<section class="container mx-auto px-4 py-8">
-
-  <div id="selected-product-container" class="transition-opacity duration-500">
-    {selectedProduct && (
-      <div id="selected-product" class="bg-white rounded-lg shadow p-6 mb-6 transform transition-all duration-500">
-        <div class="flex flex-col md:flex-row gap-6">
-          <img
-            src={selectedProduct.imageUrl}
-            alt={selectedProduct.name}
-            class="w-full md:w-1/2 h-64 object-cover rounded-md"
-          />
-          <div class="flex flex-col justify-between">
-            <div>
-              <h2 class="text-2xl font-bold mb-2">{selectedProduct.name}</h2>
-              <p class="text-gray-600 mb-4">{selectedProduct.content}</p>
-              <p class="text-gray-900 font-bold text-xl">€{selectedProduct.price}</p>
+<section class="container mx-auto px-4 py-8 relative">
+  {/* El ProductModal al seleccionar producto */}
+  <div id="selected-product-container" class="transition-opacity duration-500 -mt-32 relative z-10">
+    {
+      selectedProduct && (
+        <div
+          id="selected-product"
+          class="bg-white rounded-2xl shadow-xl p-6 mb-6 transform transition-all duration-500 relative"
+        >
+          <div class="flex flex-col md:flex-row gap-6">
+            <Image
+              src={selectedProduct.imageUrl}
+              alt={selectedProduct.name}
+              class="w-full md:w-1/2 h-64 object-cover rounded-md"
+              width={600}
+              height={400}
+              loading="eager"
+            />
+            <div class="flex flex-col justify-between">
+              <div>
+                <h2 class="text-2xl font-bold mb-2">{selectedProduct.name}</h2>
+                <p class="text-gray-600 mb-4">{selectedProduct.content}</p>
+                <p class="text-gray-900 font-bold text-xl">€{selectedProduct.price}</p>
+              </div>
+              <a href="/contacto">
+                <button class="mt-3 px-4 py-3 bg-orange-400 text-white rounded hover:bg-orange-600">
+                  Contactar para presupuesto
+                </button>
+              </a>
             </div>
-            <a href="/contacto">
-              <button class="mt-3 px-4 py-3 bg-orange-400 text-white rounded hover:bg-orange-600">
-                Contactar para presupuesto
-              </button>
-            </a>
           </div>
         </div>
-      </div>
-    )}
+      )
+    }
   </div>
 
-  <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {currentProducts.map((product: ProductProps) => (
-      <div
-        class="bg-white rounded-lg shadow border p-4 cursor-pointer"
-        onclick={`showProductDetail(${JSON.stringify(product)})`}
-      >
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          class="w-full h-40 object-cover rounded-md mb-4"
-        />
-        <h3 class="font-semibold text-lg">{product.name}</h3>
-        <p class="text-gray-600 text-sm mb-2">{product.content}</p>
-        <p class="text-gray-900 font-bold">€{product.price}</p>
-      </div>
-    ))}
+  {/* Cajas de la grid de los productos */}
+  <div class="relative z-0 mt-12">
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        currentProducts.map((product: ProductProps) => (
+          <div
+            class="bg-white rounded-lg shadow border p-4 cursor-pointer"
+            onclick={`showProductDetail(${JSON.stringify(product)})`}
+          >
+            <Image
+              src={product.imageUrl}
+              alt={product.name}
+              class="w-full md:w-1/2 h-64 object-cover rounded-md"
+              width={600}
+              height={400}
+              loading="lazy"
+            />
+            <h3 class="font-semibold text-lg">{product.name}</h3>
+            <p class="text-gray-600 text-sm mb-2">{product.content}</p>
+            <p class="text-gray-900 font-bold">€{product.price}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      id="pagination"
+      class="flex justify-center items-center mt-8 space-x-2"
+      data-current={currentPage}
+      data-total={totalPages}
+    >
+    </div>
   </div>
 
-  <div
-    id="pagination"
-    class="flex justify-center items-center mt-8 space-x-2"
-    data-current={currentPage}
-    data-total={totalPages}
-  >
-  </div>
-
-  <script src="../scripts/ProductModal.js"></script>
-  <script src="../scripts/paginacion.js"></script>
-  <script type="module">
+  {/* Script del ProductModal */}
+  <script is:inline>
     const heroContainer = document.getElementById('hero-container');
+    const heroText = heroContainer?.querySelector('.text-center');
+    const heroOriginalImage = heroContainer?.style.backgroundImage;
     const selectedContainer = document.getElementById('selected-product-container');
 
-    function hideHeroInstant() {
-      if (!heroContainer) return;
-      heroContainer.style.display = 'none';
-      heroContainer.style.opacity = 0;
+    function renderProduct(product) {
+      if (heroContainer) {
+        heroContainer.style.backgroundImage = `url('${product.imageUrl}')`;
+      }
+      if (heroText) {
+        heroText.style.display = 'none';
+      }
+
+      if (!selectedContainer) return;
+
+      selectedContainer.innerHTML = `
+    <div id="selected-product" class="bg-white rounded-2xl shadow-xl p-6 mb-6 transform scale-95 opacity-0 transition-all duration-500 relative z-10">
+      <button 
+        id="close-product" 
+        class="absolute top-2 right-2 text-gray-600 hover:text-red-600 text-2xl font-bold">
+        ✕
+      </button>
+      <div class="flex flex-col gap-4">
+        <div>
+          <h2 class="text-2xl font-bold mb-2">${product.name}</h2>
+          <p class="text-gray-600 mb-4">${product.content}</p>
+          <p class="text-gray-900 font-bold text-xl">€${product.price}</p>
+        </div>
+        <a href="/contacto">
+          <button class="mt-3 px-4 py-3 bg-orange-400 text-white rounded hover:bg-orange-600">
+            Contactar para presupuesto
+          </button>
+        </a>
+      </div>
+    </div>
+  `;
+
+      const el = document.getElementById('selected-product');
+      if (el) {
+        setTimeout(() => {
+          el.classList.remove('opacity-0', 'scale-95');
+          el.classList.add('opacity-100', 'scale-100');
+        }, 10);
+      }
+
+      const closeBtn = document.getElementById('close-product');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', restoreHero);
+      }
+    }
+
+    window.showProductDetail = (product) => {
+      renderProduct(product);
+      setSelectedInUrl(product.name);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    function restoreHero() {
+      if (heroContainer) {
+        heroContainer.style.backgroundImage = heroOriginalImage;
+      }
+      if (heroText) {
+        heroText.style.display = 'block';
+      }
+      if (selectedContainer) {
+        selectedContainer.innerHTML = '';
+      }
+      removeSelectedFromUrl();
+    }
+
+    function setSelectedInUrl(productName) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('selected', productName);
+      history.replaceState(null, '', url);
+    }
+
+    function removeSelectedFromUrl() {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('selected');
+      history.replaceState(null, '', url);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       const url = new URL(window.location.href);
       const selectedName = url.searchParams.get('selected');
-
-      if (selectedName) {
-        hideHeroInstant();
+      if (selectedName && window.products) {
+        const product = window.products.find((p) => p.name === selectedName);
+        if (product) {
+          renderProduct(product);
+        }
       }
+    });
+  </script>
+
+  {/* Paginación */}
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const paginationContainer = document.getElementById('pagination');
+      if (!paginationContainer) return;
+
+      const totalPages = parseInt(paginationContainer.dataset.total);
+      let currentPage = parseInt(paginationContainer.dataset.current);
+
+      function renderPagination() {
+        paginationContainer.innerHTML = '';
+
+        const currentUrl = new URL(window.location.href);
+        const selected = currentUrl.searchParams.get('selected');
+
+        const createLink = (page, label = null, disabled = false) => {
+          const a = document.createElement('a');
+
+          const pageUrl = new URL(window.location.origin + window.location.pathname);
+          pageUrl.searchParams.set('page', page);
+          if (selected) pageUrl.searchParams.set('selected', selected);
+
+          a.href = pageUrl.toString();
+          a.textContent = label || page;
+          a.className = `px-2 sm:px-3 py-1 border rounded text-sm sm:text-base transition ${
+            disabled
+              ? 'text-gray-400 cursor-not-allowed'
+              : page === currentPage
+                ? 'bg-orange-400 text-white border-black-500'
+                : 'text-gray-700 hover:bg-gray-100'
+          }`;
+
+          if (disabled) a.addEventListener('click', (e) => e.preventDefault());
+          return a;
+        };
+
+        const maxButtons = 4;
+
+        paginationContainer.appendChild(createLink(1, '«', currentPage === 1));
+        paginationContainer.appendChild(
+          createLink(Math.max(1, currentPage - 1), '←', currentPage === 1),
+        );
+
+        let startPage = currentPage - Math.floor(maxButtons / 2);
+        let endPage = startPage + maxButtons - 1;
+        if (startPage < 1) {
+          startPage = 1;
+          endPage = maxButtons;
+        }
+        if (endPage > totalPages) {
+          endPage = totalPages;
+          startPage = totalPages - maxButtons + 1;
+          if (startPage < 1) startPage = 1;
+        }
+
+        if (startPage > 1) {
+          const dots = document.createElement('span');
+          dots.textContent = '...';
+          dots.className = 'px-1 sm:px-2 text-gray-500 text-sm sm:text-base';
+          paginationContainer.appendChild(dots);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+          paginationContainer.appendChild(createLink(i));
+        }
+
+        if (endPage < totalPages) {
+          const dots = document.createElement('span');
+          dots.textContent = '...';
+          dots.className = 'px-1 sm:px-2 text-gray-500 text-sm sm:text-base';
+          paginationContainer.appendChild(dots);
+        }
+
+        paginationContainer.appendChild(
+          createLink(Math.min(totalPages, currentPage + 1), '→', currentPage === totalPages),
+        );
+        paginationContainer.appendChild(createLink(totalPages, '»', currentPage === totalPages));
+
+        paginationContainer.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const target = new URL(link.href);
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+              window.location.assign(target.toString());
+            }, 300);
+          });
+        });
+      }
+
+      renderPagination();
     });
   </script>
 </section>

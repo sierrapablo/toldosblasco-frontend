@@ -11,7 +11,7 @@ export const testimonials: Testimonial[] = [
     role: 'CTO',
     company: 'Techibu',
     avatar: personagenerica.src,
-    rating: 5,
+    rating: 4,
     quote:
       'La calidad del trabajo fue excelente y el trato impecable. Volveremos a contar con ellos.',
   },
@@ -20,7 +20,7 @@ export const testimonials: Testimonial[] = [
     role: 'Founder',
     company: 'Dropify',
     avatar: personagenerica2.src,
-    rating: 4,
+    rating: 3,
     quote: 'Entrega puntual y una comunicación muy fluida durante todo el proyecto.',
   },
   {
@@ -36,7 +36,7 @@ export const testimonials: Testimonial[] = [
     role: 'Marketing Lead',
     company: 'Boldly',
     avatar: personagenerica4.src,
-    rating: 5,
+    rating: 2,
     quote: 'Excelente relación calidad-precio. El soporte post-lanzamiento es de 10.',
   },
   {
@@ -44,7 +44,7 @@ export const testimonials: Testimonial[] = [
     role: 'Técnico',
     company: 'BaronetteSystems',
     avatar: tecnico.src,
-    rating: 5,
+    rating: 1,
     quote: 'Hola.',
   },
 ];

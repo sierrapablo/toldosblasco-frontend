@@ -1,16 +1,41 @@
 ---
-import Trimmed from '../layouts/Trimmed.astro';
-import ProductsComp from '../components/Products.astro';
-import CallToAction from '../components/CallToAction.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import Layout from '../layouts/Layout.astro';
+import { products } from '../data/products';
+import SkeletonProductGrid from '../components/SkeletonProductGrid.astro';
+
+// Obtener el número de página de los parámetros de consulta
+const page = Number(Astro.url.searchParams.get('page')) || 1;
+const productsPerPage = 9;
+
+// Calcular productos para la página actual
+const startIndex = (page - 1) * productsPerPage;
+const endIndex = startIndex + productsPerPage;
+const paginatedProducts = products.slice(startIndex, endIndex);
+const totalPages = Math.ceil(products.length / productsPerPage);
 
 const PAGE_PROPS = {
-  title: 'Productos',
+  title: `Productos - Página ${page}`,
   description: 'Echa un vistazo a nuestros catálogo.',
   image: '/metaimage.png',
+  heroTitle: 'Nuestros productos',
+  heroCTAButton: 'Contacto',
+  heroImage: '/src/assets/img/muestra.jpg',
+  heroLink: '/contacto',
 };
+
+// Configuración para renderizado en servidor
+export const prerender = false;
 ---
 
-<Trimmed {...PAGE_PROPS}>
-  <ProductsComp />
-  <CallToAction />
-</Trimmed>
+<Layout {...PAGE_PROPS}>
+  <ProductGrid
+    products={paginatedProducts}
+    currentPage={page}
+    totalPages={totalPages}
+    totalProducts={products.length}
+    server:defer
+  >
+    <SkeletonProductGrid slot="fallback" />
+  </ProductGrid>
+</Layout>

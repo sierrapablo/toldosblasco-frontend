@@ -5,6 +5,5 @@ dist/
 docs/
 *.config.js
 *.json
-*.md
 .env
 .gitattributes
